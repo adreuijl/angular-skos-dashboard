@@ -1,0 +1,33 @@
+<div class="margin-div">
+  <h4>
+    Selecteer en Download hier het juiste turtle bestand voor je praatplaat
+  </h4>
+  <div class="div">
+    <app-praatplaat-select
+      (selectedProfielsEmitter)="haalSelectieOp($event)"
+    ></app-praatplaat-select>
+    <div *ngIf="visibleAlt" class="download-turtle-button">
+      <app-download-turtle-button
+        class="download-turtle-button"
+        (downloadRequestEmitter)="downloadTurtle()"
+      >
+      </app-download-turtle-button>
+    </div>
+  </div>
+  <div *ngIf="visible" class="spinner">
+    <sa-spinner-infinity
+      class="spinner"
+      [size]="90"
+      [thickness]="172"
+      [speed]="100"
+      color="rgba(57, 73, 172, 1)"
+      secondaryColor="rgba(24, 24, 24, 0.1)"
+    ></sa-spinner-infinity>
+  </div>
+  <h4>
+    Ga nu naar onze ttl-graphml conversie tool:
+    <a href="https://begrippenviewer.politie.local/ldt/data2viz" target="_blank"
+      >data2viz
+    </a>
+  </h4>
+</div>

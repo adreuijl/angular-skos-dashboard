@@ -1,0 +1,4 @@
+curl -X POST https://definities.ontwikkel.local/edg/tbl/graphql/analyse_kwaliteit_begrippenstelsels \
+-H "Content-Type: application/json" \
+-o  /usr/apache-tomcat-9.0.52/webapps/dashboard/assets/result.json \
+-d '{"query": "{begrippenkaders {label, analyse{uri,doelgroepVastgelegd,doelVastgelegd,aantalConceptenZonderBron,aantalUniekeBronnen,aantalUniekeBronnenWatEenDctBibliographicResourceIs,aantalBegrippenZonderEenSkosInScheme,aantalBegrippenZonderEenSkosDefinition,aantalBroadMatch,aantalCloseMatch,aantalExactMatch,aantalNarrowMatch,aantalRelatedMatch,aantalConcepten,aantalBegrippenZonderEenStatus,aantalBegrippenDatNietVoldoetAanURIConventie,aantalBegrippenZonderEenRelatedRelatie,aantalBegrippenZonderSkosPrefLabel, aantalOrphans, aantalBegrippenMetMeerDanEenDefinitie}}}"}'

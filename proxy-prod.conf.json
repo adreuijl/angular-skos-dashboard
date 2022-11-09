@@ -1,0 +1,20 @@
+{
+    "/graphql": {
+      "target": "http://definities.ontwikkel.local/edg/tbl/graphql",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/graphql": ""
+      }    
+  },
+  "/sparql": {
+    "target": "https://definities.ontwikkel.local/edg/tbl/sparql",
+    "secure": true,
+    "changeOrigin": false,
+    "loglevel": "debug",
+    "pathRewrite": {
+      "^/sparql": ""
+    }
+  }
+ 
+}

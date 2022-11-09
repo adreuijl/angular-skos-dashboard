@@ -1,0 +1,32 @@
+<div class="grid-container">
+  <app-kaderfilter  (selectedKadersEmitter) = "haalFilterOp($event)"></app-kaderfilter>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <!--Mini Cards-->
+    <mat-grid-tile  [colspan]="( cardLayout | async )?.miniCard?.cols"
+      [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      <app-card ><app-gauge-uriconventie [aggregatedresult]="aggregatedresult"></app-gauge-uriconventie></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile  [colspan]="( cardLayout | async )?.miniCard?.cols"
+    [rowspan]="( cardLayout | async )?.miniCard?.rows">
+    <app-card ><app-gauge-status [aggregatedresult]="aggregatedresult"> </app-gauge-status></app-card>
+  </mat-grid-tile>
+  <mat-grid-tile  [colspan]="( cardLayout | async )?.miniCard?.cols"
+  [rowspan]="( cardLayout | async )?.miniCard?.rows">
+  <app-card ><app-gauge-inscheme [aggregatedresult]="aggregatedresult"></app-gauge-inscheme></app-card>
+</mat-grid-tile>
+ <mat-grid-tile  [colspan]="( cardLayout | async )?.miniCard?.cols"
+      [rowspan]="( cardLayout | async )?.miniCard?.rows">
+      <app-card ><app-gauge-bronnen [aggregatedresult]="aggregatedresult"></app-gauge-bronnen></app-card>
+    </mat-grid-tile>
+    <!--Charts-->
+    <mat-grid-tile  [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Aantal Concepten met definitie"><app-bar-definitie  [flatjsonresult]="flatjsonresult"></app-bar-definitie></app-card>
+    </mat-grid-tile>
+    <mat-grid-tile  [colspan]="( cardLayout | async )?.chart?.cols"
+      [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Aantal Concepten met bron"><app-bar-bronnen [flatjsonresult]="flatjsonresult"></app-bar-bronnen></app-card>
+    </mat-grid-tile>
+   
+  </mat-grid-list>
+ </div>

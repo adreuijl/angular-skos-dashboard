@@ -1,0 +1,845 @@
+# baseURI: http://ontologie.sema.nl/def/metamodel
+# imports: http://datashapes.org/dash
+# prefix: metamodel
+
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix edg: <http://edg.topbraid.solutions/model/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix iso-thes: <http://purl.org/iso25964/skos-thes#> .
+@prefix metadata: <http://topbraid.org/metadata#> .
+@prefix metamodel: <http://ontologie.sema.nl/def/metamodel#> .
+@prefix metamodel_begrip: <http://definities.politie.nl/metamodel/id/begrip/> .
+@prefix ont: <https://ontologie.int.politie/def/apw#> .
+@prefix ontologyprojects: <http://teamwork.topbraidlive.org/ontologyprojects#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix status: <https://ontologie.int.politie/def/status#> .
+@prefix swa: <http://topbraid.org/swa#> .
+@prefix teamwork: <http://topbraid.org/teamwork#> .
+@prefix tosh: <http://topbraid.org/tosh#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontologie.sema.nl/def/metamodel>
+  a owl:Ontology ;
+  rdfs:label "Metamodel" ;
+  owl:imports <http://datashapes.org/dash> ;
+.
+metamodel:Begrip-altLabel
+  a sh:PropertyShape ;
+  sh:path skos:altLabel ;
+  rdfs:label "Begrip altLabel PropertyShape"@nl ;
+  sh:description "An alternative lexical label for a resource."@en ;
+  sh:description "Een alternatieve term voor een begrip is een term die gebruikt kan worden als alternatief voor de voorkeursterm van dit begrip, maar niet de voorkeur heeft."@nl ;
+  sh:disjoint skos:hiddenLabel ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:name "Begrip altLabel PropertyShape"@nl ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order 1 ;
+.
+metamodel:Begrip-broadMatch
+  a sh:PropertyShape ;
+  sh:path skos:broadMatch ;
+  rdfs:label "Begrip-broad match propertyshape"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Used to state a hierarchical mapping link between two conceptual resources in different concept schemes."@en ;
+  sh:disjoint skos:relatedMatch ;
+  sh:group skos:MatchingRelationshipsPropertyGroup ;
+  sh:name "Begrip-broad match propertyshape"@nl ;
+  sh:order 0 ;
+.
+metamodel:Begrip-broader
+  a sh:PropertyShape ;
+  sh:path skos:broader ;
+  rdfs:label "bovenliggend begrip"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip aan een bovenliggend begrip in de hierarchie."@nl ;
+  sh:description "Relates a concept to a concept that is more general in meaning."@en ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "bovenliggend begrip"@nl ;
+  sh:order 0 ;
+.
+metamodel:Begrip-broaderGeneric
+  a sh:PropertyShape ;
+  sh:path iso-thes:broaderGeneric ;
+  rdfs:label "Is specialisatie van"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip aan een meer generieker begrip"@nl ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "Is specialisatie van"@nl ;
+  sh:order 1 ;
+.
+metamodel:Begrip-broaderInstantial
+  a sh:PropertyShape ;
+  sh:path iso-thes:broaderInstantial ;
+  rdfs:label "Exemplaar van"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip, een exemplaar, aan een ander begrip, de categorie, waartoe eerstgenoemde begrip behoort."@nl ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "Exemplaar van"@nl ;
+  sh:order 5 ;
+.
+metamodel:Begrip-broaderPartitive
+  a sh:PropertyShape ;
+  sh:path iso-thes:broaderPartitive ;
+  rdfs:label "Is onderdeel van"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip aan een meer omvattend begrip. Voorbeelden van eerstgenoemde begrip zullen onderdeel van voorbeelden van het meer omvattende begrip zijn."@nl ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "Is onderdeel van"@nl ;
+  sh:order 3 ;
+.
+metamodel:Begrip-closeMatch
+  a sh:PropertyShape ;
+  sh:path skos:closeMatch ;
+  rdfs:label "Vrijwel overeenkomstig"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications. In order to avoid the possibility of \"compound errors\" when combining mappings across more than two concept schemes, skos:closeMatch is not declared to be a transitive property."@en ;
+  sh:group skos:MatchingRelationshipsPropertyGroup ;
+  sh:name "Vrijwel overeenkomstig"@nl ;
+  sh:order 1 ;
+.
+metamodel:Begrip-comment
+  a sh:PropertyShape ;
+  sh:path rdfs:comment ;
+  rdfs:label "uitleg"@nl ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:name "uitleg"@nl ;
+  sh:order 7 ;
+.
+metamodel:Begrip-definition
+  a sh:PropertyShape ;
+  sh:path skos:definition ;
+  tosh:editWidget swa:RichTextEditor ;
+  rdfs:label "Definitie"@nl ;
+  sh:description "A statement or formal explanation of the meaning of a concept."@en ;
+  sh:description "Een definitie van een begrip is een tekstuele beschrijving van de betekenis van dit begrip waarmee het begrip kan worden onderscheiden van andere begrippen."@nl ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:minCount 1 ;
+  sh:name "Definitie"@nl ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order 5 ;
+.
+metamodel:Begrip-depiction
+  a sh:PropertyShape ;
+  sh:path foaf:depiction ;
+  rdfs:label "verbeelding"@nl ;
+  sh:class foaf:Image ;
+  sh:description "Een verbeelding van een object is een plaatje dat kan worden gebruikt om dit object aan te duiden."@nl ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:name "verbeelding"@nl ;
+  sh:order 8 ;
+.
+metamodel:Begrip-editorialNote
+  a sh:PropertyShape ;
+  sh:path skos:editorialNote ;
+  tosh:editWidget swa:RichTextEditor ;
+  rdfs:label "Rationale"@nl ;
+  sh:description "A note for an editor, translator or maintainer of the vocabulary."@en ;
+  sh:group skos:NotesPropertyGroup ;
+  sh:name "Rationale"@nl ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order 2 ;
+.
+metamodel:Begrip-exactMatch
+  a sh:PropertyShape ;
+  sh:path skos:exactMatch ;
+  rdfs:label "Exact overeenkomstig"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications. skos:exactMatch is a transitive property, and is a sub-property of skos:closeMatch."@en ;
+  sh:disjoint skos:broadMatch ;
+  sh:disjoint skos:relatedMatch ;
+  sh:group skos:MatchingRelationshipsPropertyGroup ;
+  sh:name "Exact overeenkomstig"@nl ;
+  sh:order 2 ;
+.
+metamodel:Begrip-hiddenLabel
+  a sh:PropertyShape ;
+  sh:path skos:hiddenLabel ;
+  rdfs:label "Zoekterm"@nl ;
+  sh:description "A lexical label for a resource that should be hidden when generating visual displays of the resource, but should still be accessible to free text search operations."@en ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:name "Zoekterm"@nl ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order 2 ;
+.
+metamodel:Begrip-inScheme
+  a sh:PropertyShape ;
+  sh:path skos:inScheme ;
+  rdfs:label "Behoort tot"@nl ;
+  sh:class skos:ConceptScheme ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "Behoort tot"@nl ;
+  sh:order 6 ;
+.
+metamodel:Begrip-narrowerGeneric
+  a sh:PropertyShape ;
+  sh:path iso-thes:narrowerGeneric ;
+  rdfs:label "Is generalisatie van"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip aan een meer specifieker begrip"@nl ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "Is generalisatie van"@nl ;
+  sh:order 2 ;
+.
+metamodel:Begrip-narrowerInstantial
+  a sh:PropertyShape ;
+  sh:path iso-thes:narrowerInstantial ;
+  rdfs:label "Categorie van"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip, de categorie, aan een begrip dat exemplarisch is voor eerstgenoemde begrip."@nl ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "Categorie van"@nl ;
+  sh:order 6 ;
+.
+metamodel:Begrip-narrowerPartitive
+  a sh:PropertyShape ;
+  sh:path iso-thes:narrowerPartitive ;
+  rdfs:label "Omvat"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een begrip aan een minder omvattend begrip. Voorbeelden van eerstgenoemde begrip zullen bestaan uit voorbeelden van het minder omvattende begrip zijn."@nl ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "Omvat"@nl ;
+  sh:order 4 ;
+.
+metamodel:Begrip-notation
+  a sh:PropertyShape ;
+  sh:path skos:notation ;
+  rdfs:label "Code"@nl ;
+  sh:description "A notation, also known as classification code, is a string of characters such as \"T58.5\" or \"303.4833\" used to uniquely identify a concept within the scope of a given concept scheme."@en ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:name "Code"@nl ;
+  sh:order 3 ;
+.
+metamodel:Begrip-prefLabel
+  a sh:PropertyShape ;
+  sh:path skos:prefLabel ;
+  rdfs:label "Voorkeursterm"@nl ;
+  sh:description "The preferred lexical label for a resource, in a given language."@en ;
+  sh:disjoint skos:altLabel ;
+  sh:disjoint skos:hiddenLabel ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "Voorkeursterm"@nl ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype rdf:langString ;
+      ]
+    ) ;
+  sh:order 0 ;
+  sh:qualifiedMaxCount 1 ;
+  sh:qualifiedValueShape [
+      sh:datatype xsd:string ;
+    ] ;
+  sh:uniqueLang true ;
+.
+metamodel:Begrip-related
+  a sh:PropertyShape ;
+  sh:path skos:related ;
+  rdfs:label "Gerelateerd"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relates a concept to a concept with which there is an associative semantic relationship."@en ;
+  sh:disjoint skos:broaderTransitive ;
+  sh:group skos:StandardRelationshipsPropertyGroup ;
+  sh:name "gerelateerd begrip"@nl ;
+  sh:name "related concept"@en ;
+  sh:order 7 ;
+.
+metamodel:Begrip-relatedMatch
+  a sh:PropertyShape ;
+  sh:path skos:relatedMatch ;
+  rdfs:label "Overeenkomstig verwant"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Used to state an associative mapping link between two conceptual resources in different concept schemes."@en ;
+  sh:group skos:MatchingRelationshipsPropertyGroup ;
+  sh:name "Overeenkomstig verwant"@nl ;
+  sh:order 3 ;
+.
+metamodel:Begrip-scopeNote
+  a sh:PropertyShape ;
+  sh:path skos:scopeNote ;
+  tosh:editWidget swa:RichTextEditor ;
+  rdfs:label "Toelichting"@nl ;
+  sh:description "A note that helps to clarify the meaning and/or the use of a concept."@en ;
+  sh:group skos:NotesPropertyGroup ;
+  sh:name "Toelichting"@nl ;
+  sh:or dash:HTMLOrStringOrLangString ;
+  sh:order 4 ;
+.
+metamodel:Begrip-source
+  a sh:PropertyShape ;
+  sh:path dct:source ;
+  rdfs:label "Begrip Bron PropertyShape"@nl ;
+  sh:class dct:BibliographicResource ;
+  sh:group skos:LabelsAndDescriptionPropertyGroup ;
+  sh:name "bron"@nl ;
+  sh:order 6 ;
+.
+metamodel:BegripShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Begrip> ;
+  rdfs:label "Begrip Shape"@nl ;
+  sh:name "BegripShape"@nl ;
+  sh:pattern "http://definities.politie.nl/(.+?)d/begrip/[A-Z0-9][a-zA-Z0-9]+$" ;
+  sh:property metamodel:Begrip-altLabel ;
+  sh:property metamodel:Begrip-broadMatch ;
+  sh:property metamodel:Begrip-broader ;
+  sh:property metamodel:Begrip-broaderGeneric ;
+  sh:property metamodel:Begrip-broaderInstantial ;
+  sh:property metamodel:Begrip-broaderPartitive ;
+  sh:property metamodel:Begrip-closeMatch ;
+  sh:property metamodel:Begrip-comment ;
+  sh:property metamodel:Begrip-definition ;
+  sh:property metamodel:Begrip-depiction ;
+  sh:property metamodel:Begrip-editorialNote ;
+  sh:property metamodel:Begrip-exactMatch ;
+  sh:property metamodel:Begrip-hiddenLabel ;
+  sh:property metamodel:Begrip-inScheme ;
+  sh:property metamodel:Begrip-narrowerGeneric ;
+  sh:property metamodel:Begrip-narrowerInstantial ;
+  sh:property metamodel:Begrip-narrowerPartitive ;
+  sh:property metamodel:Begrip-notation ;
+  sh:property metamodel:Begrip-prefLabel ;
+  sh:property metamodel:Begrip-related ;
+  sh:property metamodel:Begrip-relatedMatch ;
+  sh:property metamodel:Begrip-scopeNote ;
+  sh:property metamodel:Begrip-source ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Statusaanduiding-status ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+              sh:prefix "skos" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type skos:Concept
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:BegrippenkaderShape
+  a sh:NodeShape ;
+  dct:subject metamodel_begrip:Begrippenkader ;
+  rdfs:label "Begrippenkader Shape"@nl ;
+  sh:name "Begrippenkader"@nl ;
+  sh:pattern "http://definities.politie.nl/[a-z0-9][a-zA-Z0-9]+$" ;
+.
+metamodel:BegrippenstelselShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Begrippenstelsel> ;
+  rdfs:label "Begrippenstelsel Shape"@nl ;
+  sh:name "BegrippenstelselShape"@nl ;
+  sh:pattern "http://definities.politie.nl/id/begrippenstelsel/[A-Z0-9][a-zA-Z0-9]+$" ;
+  sh:property metamodel:BegrippenstelselShape-hasTopConcept ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+              sh:prefix "skos" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type skos:ConceptScheme .
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:BegrippenstelselShape-hasTopConcept
+  a sh:PropertyShape ;
+  sh:path skos:hasTopConcept ;
+  rdfs:label "heeft topbegrip"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert, bij conventie, een begrippenkader met een begrip dat is de top van een taxonomie." ;
+  sh:name "heeft topbegrip"@nl ;
+.
+metamodel:BrondocumentShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Brondocument> ;
+  rdfs:label "Brondocument Shape"@nl ;
+  sh:name "BrondocumentShape"@nl ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
+              sh:prefix "dct" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type dct:BibliographicResource 
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:CollectieShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Collectie> ;
+  rdfs:label "Collectie Shape"@nl ;
+  sh:name "CollectieShape"@nl ;
+  sh:pattern "http://definities.politie.nl/(.+?)d/collectie/[A-Z0-9][a-zA-Z0-9]+$" ;
+  sh:property metamodel:CollectieShape-member ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2004/02/skos/core#"^^xsd:anyURI ;
+              sh:prefix "skos" ;
+            ] ;
+        ] ;
+      sh:select """
+SELECT ?this
+      WHERE {
+        ?this a skos:Collection .
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:CollectieShape-member
+  a sh:PropertyShape ;
+  sh:path skos:member ;
+  rdfs:label "Bevat"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Relateert een collectie aan een begrip dat onderdeel is van deze collectie." ;
+  sh:name "Bevat"@nl ;
+.
+metamodel:EigenschapShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Eigenschap> ;
+  rdfs:label "Eigenschap Shape"@nl ;
+  sh:name "EigenschapShape"@nl ;
+  sh:pattern "https://ontologie.int.politie/def/[a-z0-9][a-z0-9-]+#[a-z0-9][a-zA-Z0-9]+$" ;
+  sh:property metamodel:GedefinieerdIn ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Onderwerp ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+              sh:prefix "owl" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        { ?this rdf:type rdf:Property } UNION
+        { ?this rdf:type owl:DatatypeProperty } UNION
+        { ?this rdf:type owl:ObjectProperty } 
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:EigenschapspecificatieShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Eigenschapprofiel> ;
+  rdfs:label "Eigenschapspecificatie Shape"@nl ;
+  sh:name "EigenschapspecificatieShape"@nl ;
+  sh:property metamodel:EigenschapspecificatieShape-class ;
+  sh:property metamodel:EigenschapspecificatieShape-datatype ;
+  sh:property metamodel:EigenschapspecificatieShape-maxCount ;
+  sh:property metamodel:EigenschapspecificatieShape-maxInclusive ;
+  sh:property metamodel:EigenschapspecificatieShape-maxLength ;
+  sh:property metamodel:EigenschapspecificatieShape-minCount ;
+  sh:property metamodel:EigenschapspecificatieShape-minInclusive ;
+  sh:property metamodel:EigenschapspecificatieShape-minLength ;
+  sh:property metamodel:EigenschapspecificatieShape-order ;
+  sh:property metamodel:EigenschapspecificatieShape-path ;
+  sh:property metamodel:EigenschapspecificatieShape-pattern ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Naam ;
+  sh:property metamodel:Onderwerp ;
+  sh:property metamodel:Type ;
+  sh:severity sh:Warning ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+              sh:prefix "sh" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type sh:PropertyShape .
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:EigenschapspecificatieShape-class
+  a sh:PropertyShape ;
+  sh:path sh:class ;
+  rdfs:label "Gerelateerde klasse"@nl ;
+  sh:class owl:Class ;
+  sh:description "Een gerelateerde klasse van een eigenschapspecificatie is een klasse waartoe de waarden van de eigenschap moeten behoren." ;
+  sh:maxCount 1 ;
+  sh:name "Gerelateerde klasse"@nl ;
+.
+metamodel:EigenschapspecificatieShape-datatype
+  a sh:PropertyShape ;
+  sh:path sh:datatype ;
+  rdfs:label "Heeft datatype"@nl ;
+  sh:class rdfs:Datatype ;
+  sh:description "Relateert een waarde-eigenschap aan een datatype dat voor waarden van deze waarde-eigenschap gebruikt mag worden." ;
+  sh:maxCount 1 ;
+  sh:name "Heeft datatype"@nl ;
+.
+metamodel:EigenschapspecificatieShape-maxCount
+  a sh:PropertyShape ;
+  sh:path sh:maxCount ;
+  rdfs:label "Maximum aantal"@nl ;
+  sh:datatype xsd:integer ;
+  sh:description "Het maximum aantal van een eigenschapspecificatie is een getal dat aangeeft hoe vaak voor één eigenschap een waarde maximaal mag voorkomen." ;
+  sh:maxCount 1 ;
+  sh:name "Maximum aantal"@nl ;
+.
+metamodel:EigenschapspecificatieShape-maxInclusive
+  a sh:PropertyShape ;
+  sh:path sh:maxInclusive ;
+  rdfs:label "Maximale waarde"@nl ;
+  sh:description "De maximale waarde van een eigenschapspecificatie is een getal waar elke waarde van deze eigenschap kleiner of gelijk aan moet zijn." ;
+  sh:maxCount 1 ;
+  sh:name "Maximale waarde"@nl ;
+.
+metamodel:EigenschapspecificatieShape-maxLength
+  a sh:PropertyShape ;
+  sh:path sh:maxLength ;
+  rdfs:label "Maximale lengte"@nl ;
+  sh:datatype xsd:integer ;
+  sh:description "De maximale lengte van een eigenschapspecifiatie is een getal waar de lengte van elke waarde van die eigenschap kleiner of gelijk aan moet zijn." ;
+  sh:maxCount 1 ;
+  sh:name "Maximale lengte"@nl ;
+.
+metamodel:EigenschapspecificatieShape-minCount
+  a sh:PropertyShape ;
+  sh:path sh:minCount ;
+  rdfs:label "Minimum aantal"@nl ;
+  sh:datatype xsd:integer ;
+  sh:description "Het minimum aantal van een eigenschapspecificatie is een getal dat dat aangeeft hoe vaak een waarde voor één eigenschap minimaal moet voorkomen." ;
+  sh:maxCount 1 ;
+  sh:name "Minimum aantal"@nl ;
+.
+metamodel:EigenschapspecificatieShape-minInclusive
+  a sh:PropertyShape ;
+  sh:path sh:minInclusive ;
+  rdfs:label "Minimale waarde"@nl ;
+  sh:description "De minimale waarde van een eigenschapspecificatie is een getal waar elke waarde van die eigenschap groter of gelijk aan moet zijn." ;
+  sh:maxCount 1 ;
+  sh:name "Minimale waarde"@nl ;
+.
+metamodel:EigenschapspecificatieShape-minLength
+  a sh:PropertyShape ;
+  sh:path sh:minLength ;
+  rdfs:label "Minimale lengte"@nl ;
+  sh:datatype xsd:integer ;
+  sh:description "De minimale lengte van een eigenschapspecifiatie is een getal waar de lengte van elke waarde van die eigenschap groter of gelijk aan moet zijn." ;
+  sh:maxCount 1 ;
+  sh:name "Minimale lengte"@nl ;
+.
+metamodel:EigenschapspecificatieShape-order
+  a sh:PropertyShape ;
+  sh:path sh:order ;
+  rdfs:label "Volgorde"@nl ;
+  sh:datatype xsd:integer ;
+  sh:description "De volgorde van een eigenschapspecificatie is een hierarchische codering voor de volgorde waarin deze eigenschapspecificatie getoond moet worden ten opzichte van andere eigenschapspecificaties voor dezelfde klasse." ;
+  sh:maxCount 1 ;
+  sh:name "Volgorde"@nl ;
+.
+metamodel:EigenschapspecificatieShape-path
+  a sh:PropertyShape ;
+  sh:path sh:path ;
+  rdfs:label "Betreft eigenschap"@nl ;
+  sh:class rdf:Property ;
+  sh:description "Relateert deze eigenschapspecificatie aan de eigenschap of het pad naar een eigenschap waar deze specificatie over gaat." ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "Betreft eigenschap"@nl ;
+.
+metamodel:EigenschapspecificatieShape-pattern
+  a sh:PropertyShape ;
+  sh:path sh:pattern ;
+  rdfs:label "Patroon"@nl ;
+  sh:datatype xsd:string ;
+  sh:description "Een patroon voor een eigenschapspecificatie is een een reguliere expressie waar tekstuele waarden voor deze eigenschap aan moeten voldoen." ;
+  sh:maxCount 1 ;
+  sh:name "Patroon"@nl ;
+.
+metamodel:GedefinieerdIn
+  a sh:PropertyShape ;
+  sh:path rdfs:isDefinedBy ;
+  rdfs:label "Gedefinieerd in"@nl ;
+  sh:class owl:Ontology ;
+  sh:description "Relateert een (specificatie van een) klasse of eigenschap aan de ontologie waarin de klasse of eigenschap is gedefinieerd." ;
+  sh:minCount 1 ;
+  sh:name "Gedefinieerd in"@nl ;
+.
+metamodel:KlasseShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Klasse> ;
+  rdfs:label "Klasse Shape"@nl ;
+  sh:name "KlasseShape"@nl ;
+  sh:pattern "https://ontologie.int.politie/def/[a-z0-9][a-z0-9-]+#[A-Z0-9][a-zA-Z0-9]+$" ;
+  sh:property metamodel:GedefinieerdIn ;
+  sh:property metamodel:KlasseShape-deprecated ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Onderwerp ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+              sh:prefix "owl" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type owl:Class .
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:KlasseShape-deprecated
+  a sh:PropertyShape ;
+  sh:path owl:deprecated ;
+  sh:datatype xsd:boolean ;
+  sh:description "De klasse is 'verouderd' of afgekeurd en zal bij een volgende iteratie verwijderd dan wel vervangen worden."@nl ;
+  sh:maxCount 1 ;
+  sh:name "Afgekeurd"@nl ;
+.
+metamodel:KlassespecificatieShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Klasseprofiel> ;
+  rdfs:label "Klassespecificatie Shape"@nl ;
+  sh:name "KlassespecificatieShape"@nl ;
+  sh:pattern "https://ontologie.int.politie/def/[a-z0-9][a-zA-Z0-9-]+#[A-Z0-9][a-zA-Z0-9]+$" ;
+  sh:property metamodel:KlassespecificatieShape-property ;
+  sh:property metamodel:KlassespecificatieShape-targetClass ;
+  sh:property metamodel:Label ;
+  sh:property metamodel:Onderwerp ;
+  sh:property metamodel:Type ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/ns/shacl#"^^xsd:anyURI ;
+              sh:prefix "sh" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type sh:NodeShape .
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+.
+metamodel:KlassespecificatieShape-property
+  a sh:PropertyShape ;
+  sh:path sh:property ;
+  rdfs:label "Heeft eigenschap"@nl ;
+  sh:class sh:PropertyShape ;
+  sh:description "Relateert een klassespecificatie met een bijbehorende eigenschapspecificatie." ;
+  sh:name "Heeft eigenschap"@nl ;
+.
+metamodel:KlassespecificatieShape-targetClass
+  a sh:PropertyShape ;
+  sh:path sh:targetClass ;
+  rdfs:label "Betreft klasse"@nl ;
+  sh:class owl:Class ;
+  sh:description "Relateert een klassespecificatie met een klasse, waarmee wordt gesteld dat alle voorkomens van deze klasse moeten voldoen aan de klassespecificatie." ;
+  sh:name "Betreft klasse"@nl ;
+.
+metamodel:Label
+  a sh:PropertyShape ;
+  sh:path rdfs:label ;
+  rdfs:label "Label"@nl ;
+  sh:datatype rdf:langString ;
+  sh:description "Een label voor een object is een voor mensen leesbare naam ter aanduiding van een object." ;
+  sh:minCount 1 ;
+  sh:name "Label"@nl ;
+.
+metamodel:Naam
+  a sh:PropertyShape ;
+  sh:path sh:name ;
+  rdfs:label "Technische naam"@nl ;
+  sh:datatype rdf:langString ;
+  sh:description "Een technische naam voor een specificatie van een klasse of eigenschap is een voor mensen leesbaar technisch label in de context van de klassespecificatie." ;
+  sh:minCount 1 ;
+  sh:name "Technische naam"@nl ;
+.
+metamodel:Onderwerp
+  a sh:PropertyShape ;
+  sh:path dct:subject ;
+  rdfs:label "Onderwerp"@nl ;
+  sh:class skos:Concept ;
+  sh:description "Het onderwerp van een informatie-object is het begrip waarover het informatie-object gaat." ;
+  sh:name "Onderwerp"@nl ;
+.
+metamodel:OntologieShape
+  a sh:NodeShape ;
+  dct:subject <http://definities.politie.nl/smp/id/begrip/Ontologie> ;
+  rdfs:label "Ontologie Shape"@nl ;
+  sh:name "Ontologie shape"@nl ;
+  sh:pattern "https://ontologie.int.politie/def/[a-z0-9][a-z0-9-]+$" ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+              sh:prefix "owl" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type owl:Ontology
+        FILTER( regex(str(?this),\"ontologie.int.politie/\"))    
+      }""" ;
+    ] ;
+.
+metamodel:OntologyShape
+  a sh:NodeShape ;
+  rdfs:label "Ontology Shape"@nl ;
+  sh:description "Deze shape valideert instanties van owl:Ontology op de validatieregels gedefinieerd voor ontologieën en begrippenkaders"@nl ;
+  sh:name "Ontology shape"@nl ;
+  sh:target [
+      a sh:SPARQLTarget ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+              sh:prefix "rdf" ;
+            ] ;
+        ] ;
+      sh:prefixes [
+          sh:declare [
+              sh:namespace "http://www.w3.org/2002/07/owl#"^^xsd:anyURI ;
+              sh:prefix "owl" ;
+            ] ;
+        ] ;
+      sh:select """SELECT ?this
+      WHERE {
+        ?this rdf:type owl:Ontology .
+        FILTER(CONTAINS(STR(?this),\"politie\"))    
+      }""" ;
+    ] ;
+  sh:xone (
+      metamodel:OntologieShape
+      metamodel:BegrippenkaderShape
+    ) ;
+.
+metamodel:Statusaanduiding-status
+  a sh:PropertyShape ;
+  sh:path status:status ;
+  rdfs:label "Statusaanduiding-status"@nl ;
+  sh:in (
+      status:Gepubliceerd
+      status:Teruggetrokken
+      status:Gearchiveerd
+      status:Werkversie
+      status:InReview
+      status:Verouderd
+      status:Akkoord
+      status:TeBewerken
+      status:Vastgesteld
+      status:InBewerking
+    ) ;
+  sh:maxCount 1 ;
+  sh:minCount 1 ;
+  sh:name "status"@nl ;
+.
+metamodel:Type
+  a sh:PropertyShape ;
+  sh:path rdf:type ;
+  rdfs:label "Type"@nl ;
+  sh:description "Een type van een object is een klasse waartoe het object volgens de definitie van die klasse behoort." ;
+  sh:name "Type"@nl ;
+.

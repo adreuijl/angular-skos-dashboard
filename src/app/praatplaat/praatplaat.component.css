@@ -1,0 +1,12 @@
+.margin-div {
+    margin: 40px;
+}
+
+.download-turtle-button {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.div {
+    display: flex;
+}
