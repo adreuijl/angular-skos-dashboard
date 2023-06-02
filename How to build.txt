@@ -1,3 +1,0 @@
-run command:
-
-npm run-script build -- --base-href /dashboard/

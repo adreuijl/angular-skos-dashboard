@@ -1,6 +1,0 @@
-<mat-form-field class="dashboard-filter" appearance="fill">
-    <mat-label>Begrippenkaders</mat-label>
-    <mat-select [formControl]="kaders" multiple (selectionChange)="onKaderSelect($event)"> 
-      <mat-option *ngFor="let kader of kadersList" [value]="kader" >{{kader}}</mat-option>
-    </mat-select>
-  </mat-form-field>

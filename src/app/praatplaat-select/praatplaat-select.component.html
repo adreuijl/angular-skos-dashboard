@@ -1,6 +1,0 @@
-<mat-form-field class="praatplaat-filter" appearance="fill">
-    <mat-label>Praatplaten</mat-label>
-    <mat-select [formControl]="profielFormControl" (selectionChange)="onProfielSelect($event)" > 
-      <mat-option *ngFor="let profiel of profielen" [value]="profiel" >{{profiel.label}}</mat-option>
-    </mat-select>
-  </mat-form-field>
